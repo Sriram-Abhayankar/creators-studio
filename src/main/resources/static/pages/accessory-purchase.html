@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessory Purchase — Creators Studio</title>
+  <meta name="description" content="Record an accessory purchase entry.">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/purchase.css">
+</head>
+<body class="purchase-page">
+  <div id="toast-container"></div>
+  <div class="card purchase-card">
+    <div class="logo-wrap">
+      <img src="../images/logo.jpeg" alt="Creators Studio Logo" class="logo-img">
+      <span class="app-title">Creators Studio</span>
+    </div>
+    <div class="breadcrumb">Purchasing bills / Categories / Accessories</div>
+
+    <h1 id="page-heading" style="text-align:center;margin-bottom:1.25rem">Accessories</h1>
+
+    <form id="accessory-form" novalidate>
+
+      <!-- Accessory Name (free text, shared) -->
+      <div class="form-group">
+        <label class="form-label" for="accessory-name-input">Accessory Name</label>
+        <input id="accessory-name-input" type="text" class="form-control" placeholder="Enter accessory name" required>
+      </div>
+
+      <!-- Accessory Type Selector -->
+      <div class="form-group">
+        <label class="form-label" for="accessory-type-select">Accessory Type</label>
+        <select id="accessory-type-select" class="form-control">
+          <option value="">-- Select Type --</option>
+        </select>
+      </div>
+
+      <hr class="section-divider">
+
+      <!-- ── CONE SECTION ──────────────────────────────── -->
+      <div id="cone-section" class="accessory-section">
+        <div id="cone-rows"></div>
+        <button type="button" id="add-cone-row-btn" class="add-row-btn">+ Add Cone Entry</button>
+        <div class="total-section" style="margin-top:1rem">
+          <div class="total-label">Total Price</div>
+          <div class="total-value" id="cone-total-display">₹0.00</div>
+        </div>
+      </div>
+
+      <!-- ── SIZE PATTERN SECTION ──────────────────────── -->
+      <div id="sp-section" class="accessory-section">
+        <div class="form-group">
+          <label class="form-label" for="sp-brand">Brand Name</label>
+          <input id="sp-brand" type="text" class="form-control" placeholder="Enter brand name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="sp-style-number">Style Number</label>
+          <input id="sp-style-number" type="number" class="form-control" placeholder="Enter style number">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="sp-style-name">Style Name</label>
+          <input id="sp-style-name" type="text" class="form-control" placeholder="Enter style name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="sp-price">Price</label>
+          <div class="input-unit-wrap">
+            <span class="unit-label" style="border-radius:var(--radius-sm) 0 0 var(--radius-sm);border-right:none;border-left:1px solid var(--border);">₹</span>
+            <input id="sp-price" type="number" class="form-control" placeholder="Enter price" step="0.01" min="0.01" style="border-radius:0 var(--radius-sm) var(--radius-sm) 0;">
+          </div>
+        </div>
+        <div class="total-section">
+          <div class="total-label">Total Price</div>
+          <div class="total-value" id="sp-total-display">₹0.00</div>
+        </div>
+      </div>
+
+      <!-- ── OTHERS SECTION ─────────────────────────────── -->
+      <div id="others-section" class="accessory-section">
+        <div class="form-group">
+          <label class="form-label" for="others-name">Name</label>
+          <input id="others-name" type="text" class="form-control" placeholder="Enter item name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="others-unit">Unit / Kg / Gross</label>
+          <input id="others-unit" type="number" class="form-control" placeholder="Enter unit" step="0.01" min="0.01">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="others-price">Price</label>
+          <div class="input-unit-wrap">
+            <span class="unit-label" style="border-radius:var(--radius-sm) 0 0 var(--radius-sm);border-right:none;border-left:1px solid var(--border);">₹</span>
+            <input id="others-price" type="number" class="form-control" placeholder="Enter price" step="0.01" min="0.01" style="border-radius:0 var(--radius-sm) var(--radius-sm) 0;">
+          </div>
+        </div>
+        <div class="total-section">
+          <div class="total-label">Total Price</div>
+          <div class="total-value" id="others-total-display">₹0.00</div>
+        </div>
+      </div>
+
+      <div class="page-actions" style="margin-top:1.5rem">
+        <button type="button" id="go-back-btn" class="btn btn-ghost">Go Back</button>
+        <button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/accessory-purchase.js"></script>
+</body>
+</html>

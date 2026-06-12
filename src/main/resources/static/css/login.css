@@ -1,0 +1,19 @@
+/* login.css — Login & Register Pages */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 360px;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.25rem;
+}

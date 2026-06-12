@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fabric History — Creators Studio</title>
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/history.css">
+</head>
+<body class="history-page">
+  <div id="toast-container"></div>
+  <div class="card history-card">
+    <div class="logo-wrap">
+      <img src="../images/logo.jpeg" alt="Creators Studio Logo" class="logo-img">
+      <span class="app-title">Creators Studio</span>
+      <span class="page-subtitle">Fabric Purchase History</span>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;gap:1rem;flex-wrap:wrap;">
+      <a href="/pages/fabric-purchase.html" class="btn btn-outline btn-sm">+ New Purchase</a>
+    </div>
+
+    <!-- Filter Panel -->
+    <div class="filter-panel" style="background:var(--bg-light); border:1px solid var(--border); border-radius:var(--radius-md); padding:1rem; margin-bottom:1.25rem; display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:0.75rem; text-align:left;">
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="form-label" style="font-size:0.75rem; margin-bottom:0.25rem;">Search Name</label>
+        <input type="text" id="filter-name" class="form-control" placeholder="Search fabrics..." style="padding:0.4rem 0.6rem; font-size:0.85rem;">
+      </div>
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="form-label" style="font-size:0.75rem; margin-bottom:0.25rem;">Fabric Type</label>
+        <select id="filter-type" class="form-control" style="padding:0.4rem 0.6rem; font-size:0.85rem; height:auto;">
+          <option value="">All Types</option>
+          <option value="Loop Knit">Loop Knit</option>
+          <option value="Single Jersey">Single Jersey</option>
+          <option value="Rib">Rib</option>
+          <option value="Fleece">Fleece</option>
+          <option value="Sinker">Sinker</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="form-label" style="font-size:0.75rem; margin-bottom:0.25rem;">Start Date</label>
+        <input type="date" id="filter-start-date" class="form-control" style="padding:0.4rem 0.6rem; font-size:0.85rem;">
+      </div>
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="form-label" style="font-size:0.75rem; margin-bottom:0.25rem;">End Date</label>
+        <input type="date" id="filter-end-date" class="form-control" style="padding:0.4rem 0.6rem; font-size:0.85rem;">
+      </div>
+      <div class="form-group" style="margin-bottom:0;">
+        <label class="form-label" style="font-size:0.75rem; margin-bottom:0.25rem;">Sort By</label>
+        <select id="filter-sort" class="form-control" style="padding:0.4rem 0.6rem; font-size:0.85rem; height:auto;">
+          <option value="latest">Latest First</option>
+          <option value="oldest">Oldest First</option>
+        </select>
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:0.5rem;">
+        <button id="clear-filters-btn" class="btn btn-ghost btn-sm" style="width:100%; padding:0.45rem; font-size:0.8rem; border:1px solid var(--border);">Reset</button>
+      </div>
+    </div>
+
+    <div id="history-list" class="history-list"></div>
+
+    <div class="page-actions" style="margin-top:1.5rem;justify-content:flex-start">
+      <button id="go-back-btn" class="btn btn-ghost btn-sm">← Back to Dashboard</button>
+    </div>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/fabric-history.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Creators Studio</title>
+  <meta name="description" content="Creators Studio dashboard — manage purchasing bills and expense records.">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="dashboard-page">
+  <div id="toast-container"></div>
+  <div class="card dashboard-card">
+    <div class="logo-wrap">
+      <img src="../images/logo.jpeg" alt="Creators Studio Logo" class="logo-img">
+      <span class="app-title">Creators Studio</span>
+    </div>
+
+    <!-- Expense summary strip (loaded from API) -->
+    <div class="summary-strip">
+      <div class="summary-item">
+        <div class="s-value" id="fabric-count">—</div>
+        <div class="s-label">Fabric Bills</div>
+      </div>
+      <div class="summary-item">
+        <div class="s-value" id="acc-count">—</div>
+        <div class="s-label">Accessory Bills</div>
+      </div>
+      <div class="summary-item">
+        <div class="s-value" id="fabric-exp">—</div>
+        <div class="s-label">Fabric Expense</div>
+      </div>
+      <div class="summary-item">
+        <div class="s-value" id="acc-exp">—</div>
+        <div class="s-label">Accessory Expense</div>
+      </div>
+      <div class="summary-item summary-total">
+        <div class="s-value" id="total-exp">—</div>
+        <div class="s-label">Total Expense</div>
+      </div>
+    </div>
+
+    <!-- Module navigation -->
+    <div class="nav-stack">
+      <button id="purchasing-btn" class="nav-btn">Purchasing Bills</button>
+      <button id="reports-btn" class="nav-btn btn-primary" style="background:linear-gradient(135deg, var(--primary), #4facfe); color:white; font-weight:600;">📈 Expense Reports</button>
+    </div>
+
+    <!-- Purchase history quick links -->
+    <div class="nav-stack" style="margin-top:0">
+      <a href="/pages/fabric-history.html" class="nav-btn" style="font-size:0.9rem;opacity:0.85">📋 Fabric Purchase History</a>
+      <a href="/pages/accessory-history.html" class="nav-btn" style="font-size:0.9rem;opacity:0.85">📋 Accessory Purchase History</a>
+    </div>
+
+    <!-- Recent Purchases Widgets -->
+    <div class="recent-sections-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:1.25rem; margin-top:1.25rem; text-align:left;">
+      <div class="recent-card" style="background:var(--bg-light); border:1px solid var(--border); padding:0.85rem; border-radius:var(--radius-md);">
+        <h3 style="margin-top:0; margin-bottom:0.75rem; font-size:0.95rem; color:var(--text); border-bottom:1px solid var(--border); padding-bottom:0.4rem; display:flex; align-items:center; gap:0.25rem;">🧵 Recent Fabrics</h3>
+        <div id="recent-fabrics-list" class="recent-list" style="display:flex; flex-direction:column; gap:0.5rem;">
+          <div style="font-size:0.8rem; color:var(--text-light); text-align:center; padding:1rem;">Loading...</div>
+        </div>
+      </div>
+      
+      <div class="recent-card" style="background:var(--bg-light); border:1px solid var(--border); padding:0.85rem; border-radius:var(--radius-md);">
+        <h3 style="margin-top:0; margin-bottom:0.75rem; font-size:0.95rem; color:var(--text); border-bottom:1px solid var(--border); padding-bottom:0.4rem; display:flex; align-items:center; gap:0.25rem;">🧶 Recent Accessories</h3>
+        <div id="recent-accessories-list" class="recent-list" style="display:flex; flex-direction:column; gap:0.5rem;">
+          <div style="font-size:0.8rem; color:var(--text-light); text-align:center; padding:1rem;">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dashboard-footer">
+      <button id="logout-btn" class="btn btn-ghost btn-sm">Logout</button>
+    </div>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

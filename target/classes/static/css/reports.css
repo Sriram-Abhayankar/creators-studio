@@ -1,0 +1,164 @@
+/* reports.css — Reports & Analytics Styling */
+
+.reports-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.reports-card {
+    width: 100%;
+    max-width: 900px;
+    padding: 2rem;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+/* Summary Grid styling */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    text-align: left;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.summary-card.total {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: none;
+}
+
+.summary-card.total .s-title {
+    color: #94a3b8;
+}
+
+.summary-card.total .s-amount {
+    color: white;
+}
+
+.s-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.s-amount {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text-dark);
+}
+
+/* Sections */
+.report-section {
+    margin-bottom: 2.5rem;
+    text-align: left;
+}
+
+.section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--bg-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Tables */
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+    background: white;
+}
+
+.report-table th, .report-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+.report-table th {
+    background: var(--bg-light);
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.report-table tr:hover td {
+    background: #f8fafc;
+}
+
+/* Visual Bar Proportions */
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.progress-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 4px;
+    transition: width 0.5s ease-out;
+}
+
+.progress-percent {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-light);
+    min-width: 30px;
+}
+
+/* Disclaimers */
+.disclaimer {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    background: #f1f5f9;
+    border-left: 3px solid #64748b;
+    padding: 0.6rem 0.8rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Export Buttons Group */
+.export-group {
+    display: flex;
+    gap: 0.5rem;
+}

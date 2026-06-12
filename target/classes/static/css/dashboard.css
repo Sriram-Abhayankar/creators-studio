@@ -1,0 +1,63 @@
+/* dashboard.css — Dashboard & Purchasing Bills Pages */
+
+.dashboard-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.dashboard-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.nav-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin: 1.5rem 0;
+}
+
+.dashboard-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+.coming-soon-badge {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+  font-weight: 400;
+}
+
+/* Dashboard summary strip */
+.summary-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+.summary-item {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  text-align: center;
+}
+.summary-item .s-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.summary-item .s-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+.summary-total {
+  grid-column: 1 / -1;
+  background: var(--bg-hover);
+}

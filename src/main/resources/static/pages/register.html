@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register — Creators Studio</title>
+  <meta name="description" content="Create a new Creators Studio account.">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+<body class="auth-page">
+  <div id="toast-container"></div>
+  <div class="card auth-card">
+    <div class="logo-wrap">
+      <img src="../images/logo.jpeg" alt="Creators Studio Logo" class="logo-img">
+      <span class="app-title">Creators Studio</span>
+      <span class="page-subtitle">Register</span>
+    </div>
+
+    <form id="register-form" novalidate>
+      <div class="form-group">
+        <label class="form-label" for="username">Username</label>
+        <input id="username" type="text" class="form-control" placeholder="Enter username" required autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="password">New Password</label>
+        <input id="password" type="password" class="form-control" placeholder="Enter password" required autocomplete="new-password">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="confirm-password">Confirm Password</label>
+        <input id="confirm-password" type="password" class="form-control" placeholder="Enter password again" required autocomplete="new-password">
+      </div>
+      <div id="error-msg" style="color:var(--error);font-size:0.85rem;margin-bottom:0.75rem;min-height:1.2em;"></div>
+      <button id="register-btn" type="submit" class="btn btn-primary btn-full">Register</button>
+    </form>
+
+    <div class="auth-footer">
+      <span class="link" onclick="window.location.href='/pages/login.html'">Already have an account?</span>
+    </div>
+  </div>
+
+  <script src="../js/common.js"></script>
+  <script src="../js/register.js"></script>
+</body>
+</html>
