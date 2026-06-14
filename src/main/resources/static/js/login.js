@@ -1,9 +1,24 @@
 // login.js — Login page logic
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // If already logged in, go to dashboard
     if (getSession()) {
         window.location.href = '/pages/dashboard.html';
         return;
+    }
+
+    // Single-user guard: redirect to register if no account exists yet
+    try {
+        const statusRes = await apiCall('GET', '/api/auth/status');
+        if (statusRes.data.registrationOpen) {
+            window.location.href = '/pages/register.html';
+            return;
+        }
+        // Account exists — hide the registration link entirely
+        const authFooter = document.getElementById('auth-footer-link');
+        if (authFooter) authFooter.style.display = 'none';
+    } catch (ex) {
+        // On status check failure, continue to show login normally
+        console.warn('Could not check auth status:', ex.message);
     }
 
     const form = document.getElementById('login-form');

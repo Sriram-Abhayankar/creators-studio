@@ -21,17 +21,14 @@
 
     <form id="accessory-form" novalidate>
 
-      <!-- Accessory Name (free text, shared) -->
+      <!-- Accessory Name (dropdown) -->
       <div class="form-group">
         <label class="form-label" for="accessory-name-input">Accessory Name</label>
-        <input id="accessory-name-input" type="text" class="form-control" placeholder="Enter accessory name" required>
-      </div>
-
-      <!-- Accessory Type Selector -->
-      <div class="form-group">
-        <label class="form-label" for="accessory-type-select">Accessory Type</label>
-        <select id="accessory-type-select" class="form-control">
-          <option value="">-- Select Type --</option>
+        <select id="accessory-name-input" class="form-control" required>
+          <option value="">-- Select Accessory --</option>
+          <option value="CONE">Cone</option>
+          <option value="SIZE_PATTERN">Size Pattern</option>
+          <option value="OTHERS">Others</option>
         </select>
       </div>
 

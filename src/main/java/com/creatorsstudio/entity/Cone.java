@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +25,6 @@ public class Cone {
     @JoinColumn(name = "Accessory_id")
     @JsonBackReference(value = "accessory-cone")
     private Accessory accessory;
-
-    @Column(name = "Purchase_date", nullable = false)
-    private LocalDateTime purchaseDate;
-
-    @CreationTimestamp
-    @Column(name = "Created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
 
     @OneToMany(mappedBy = "cone", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference

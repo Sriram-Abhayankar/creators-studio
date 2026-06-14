@@ -16,26 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load data initially
     loadAccessoryHistory();
 
-    // Enable/disable date filters based on selected type
-    function updateDateInputState() {
-        const type = typeSelect.value;
-        if (type === 'SIZE_PATTERN' || type === 'OTHERS') {
-            startDateInput.value = '';
-            endDateInput.value = '';
-            startDateInput.disabled = true;
-            endDateInput.disabled = true;
-            startDateInput.style.opacity = '0.5';
-            endDateInput.style.opacity = '0.5';
-        } else {
-            startDateInput.disabled = false;
-            endDateInput.disabled = false;
-            startDateInput.style.opacity = '1';
-            endDateInput.style.opacity = '1';
-        }
-    }
-
     typeSelect.addEventListener('change', () => {
-        updateDateInputState();
         loadAccessoryHistory();
     });
 
@@ -53,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
         startDateInput.value = '';
         endDateInput.value = '';
         sortSelect.value = 'latest';
-        updateDateInputState();
         loadAccessoryHistory();
     });
 });
@@ -116,6 +96,7 @@ async function loadAccessoryHistory() {
                 <div class="item-name">${esc(a.accessoryName)}</div>
                 <div class="item-meta">
                   <span class="type-badge ${typeCls}">${formatType(a.type)}</span>
+                  <span style="color:var(--text-light); font-size:0.78rem;">${a.purchaseDate ? formatDate(a.purchaseDate) : ''}</span>
                 </div>
               </div>
               <span class="item-price">${formatCurrency(a.totalPrice)}</span>
@@ -131,3 +112,4 @@ async function loadAccessoryHistory() {
 }
 
 function esc(v) { return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+

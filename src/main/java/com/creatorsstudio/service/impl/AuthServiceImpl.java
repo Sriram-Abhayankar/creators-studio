@@ -20,7 +20,17 @@ public class AuthServiceImpl implements AuthService {
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
+    public boolean accountExists() {
+        return userRepository.count() > 0;
+    }
+
+    @Override
     public UserResponse registerUser(UserRegisterRequest request) {
+        // Single-user enforcement: only one account may ever exist
+        if (accountExists()) {
+            throw new ValidationException("Account already exists. Registration is disabled.");
+        }
+
         if (!request.getPassword().equals(request.getConfirmPassword())) {
             throw new ValidationException("Passwords do not match");
         }

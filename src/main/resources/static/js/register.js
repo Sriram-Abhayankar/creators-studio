@@ -1,8 +1,21 @@
-// register.js — Registration page logic
-document.addEventListener('DOMContentLoaded', () => {
+// register.js — Registration page logic (single-user enforcement)
+document.addEventListener('DOMContentLoaded', async () => {
     if (getSession()) {
         window.location.href = '/pages/dashboard.html';
         return;
+    }
+
+    // Single-user guard: if an account already exists, registration is disabled
+    try {
+        const statusRes = await apiCall('GET', '/api/auth/status');
+        if (!statusRes.data.registrationOpen) {
+            // An account already exists — redirect to login
+            window.location.href = '/pages/login.html';
+            return;
+        }
+    } catch (ex) {
+        // On status check failure, continue to show registration normally
+        console.warn('Could not check auth status:', ex.message);
     }
 
     const form = document.getElementById('register-form');

@@ -4,7 +4,6 @@
  * Edit mode: accessory-purchase.html?id=123&type=CONE (or SIZE_PATTERN / OTHERS)
  */
 
-const ACCESSORY_TYPES = ['Cone', 'Size Pattern', 'Others'];
 
 let coneRowCount = 0;
 let editId   = null;
@@ -19,17 +18,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('page-heading').textContent = isEdit ? 'Edit Accessory Purchase' : 'Accessories';
 
-    // Populate accessory type dropdown
-    const typeSelect = document.getElementById('accessory-type-select');
-    ACCESSORY_TYPES.forEach(t => {
-        const o = document.createElement('option');
-        o.value = t.toUpperCase().replace(' ', '_');
-        o.textContent = t;
-        typeSelect.appendChild(o);
-    });
-
-    typeSelect.addEventListener('change', () => {
-        showSection(typeSelect.value);
+    const nameSelect = document.getElementById('accessory-name-input');
+    nameSelect.addEventListener('change', () => {
+        showSection(nameSelect.value);
     });
 
     document.getElementById('add-cone-row-btn').addEventListener('click', () => addConeRow());
@@ -48,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('accessory-form').addEventListener('submit', handleSubmit);
 
     if (isEdit && editType) {
-        const sel = typeSelect;
+        const sel = nameSelect;
         sel.value = editType;
         sel.disabled = true;   // type-locked in edit mode
         showSection(editType);
@@ -136,7 +127,8 @@ async function loadExistingAccessory(id, type) {
         const res = await apiCall('GET', `/api/purchases/accessories/${id}`);
         const a   = res.data;
 
-        document.getElementById('accessory-name-input').value = a.accessoryName || '';
+        const nameSelect = document.getElementById('accessory-name-input');
+        nameSelect.value = type;
 
         if (type === 'CONE' && a.cone) {
             // Clear default row, recreate from data
@@ -169,8 +161,9 @@ async function loadExistingAccessory(id, type) {
 async function handleSubmit(e) {
     e.preventDefault();
     const btn  = document.getElementById('submit-btn');
-    const type = document.getElementById('accessory-type-select').value;
-    const accName = document.getElementById('accessory-name-input').value.trim();
+    const nameSelect = document.getElementById('accessory-name-input');
+    const type = nameSelect.value;
+    const accName = type ? nameSelect.options[nameSelect.selectedIndex].text : '';
     btn.disabled = true;
     btn.textContent = editId ? 'Updating…' : 'Submitting…';
 
@@ -208,7 +201,7 @@ async function handleSubmit(e) {
             };
             url = editId ? `/api/purchases/accessories/others/${editId}` : '/api/purchases/accessories/others';
         } else {
-            showToast('Please select an accessory type.', 'error');
+            showToast('Please select an accessory name/type.', 'error');
             btn.disabled = false;
             btn.textContent = editId ? 'Update' : 'Submit';
             return;

@@ -32,24 +32,24 @@ document.addEventListener('DOMContentLoaded', async () => {
             fabricList.innerHTML = '';
             d.recentFabrics.forEach(f => {
                 const item = document.createElement('div');
-                item.style.cssText = 'display:flex; justify-content:space-between; align-items:center; font-size:0.82rem; padding:0.45rem; border-radius:var(--radius-sm); border:1px solid var(--border); background:white; cursor:pointer; transition:background 0.2s;';
+                item.style.cssText = 'display:flex; justify-content:space-between; align-items:center; font-size:0.82rem; padding:0.45rem; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--bg-card); cursor:pointer; transition:background 0.2s;';
                 item.innerHTML = `
-                  <div>
-                    <div style="font-weight:600; color:var(--text-dark);">${esc(f.fabricName)}</div>
-                    <div style="font-size:0.72rem; color:var(--text-light);">${esc(f.fabricType)} · ${formatDate(f.purchaseDate)}</div>
+                  <div style="min-width:0; overflow:hidden;">
+                    <div style="font-weight:600; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${esc(f.fabricName)}</div>
+                    <div style="font-size:0.72rem; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${esc(f.fabricType)} · ${formatDate(f.purchaseDate)}</div>
                   </div>
-                  <div style="font-weight:700; color:var(--primary);">${formatCurrency(f.totalPrice)}</div>
+                  <div style="font-weight:700; color:var(--text-primary); margin-left:0.5rem; flex-shrink:0;">${formatCurrency(f.totalPrice)}</div>
                 `;
                 item.addEventListener('click', () => {
                     window.location.href = `/pages/fabric-detail.html?id=${f.id}`;
                 });
                 // subtle hover effect
-                item.addEventListener('mouseenter', () => item.style.background = 'var(--bg-light)');
-                item.addEventListener('mouseleave', () => item.style.background = 'white');
+                item.addEventListener('mouseenter', () => item.style.background = 'var(--bg-hover)');
+                item.addEventListener('mouseleave', () => item.style.background = 'var(--bg-card)');
                 fabricList.appendChild(item);
             });
         } else {
-            fabricList.innerHTML = '<div style="font-size:0.8rem; color:var(--text-light); text-align:center; padding:1rem;">No recent fabrics.</div>';
+            fabricList.innerHTML = '<div style="font-size:0.8rem; color:var(--text-muted); text-align:center; padding:1rem;">No recent fabrics.</div>';
         }
 
         // Render Recent Accessories
@@ -57,23 +57,23 @@ document.addEventListener('DOMContentLoaded', async () => {
             accList.innerHTML = '';
             d.recentAccessories.forEach(a => {
                 const item = document.createElement('div');
-                item.style.cssText = 'display:flex; justify-content:space-between; align-items:center; font-size:0.82rem; padding:0.45rem; border-radius:var(--radius-sm); border:1px solid var(--border); background:white; cursor:pointer; transition:background 0.2s;';
+                item.style.cssText = 'display:flex; justify-content:space-between; align-items:center; font-size:0.82rem; padding:0.45rem; border-radius:var(--radius-sm); border:1px solid var(--border); background:var(--bg-card); cursor:pointer; transition:background 0.2s;';
                 item.innerHTML = `
-                  <div>
-                    <div style="font-weight:600; color:var(--text-dark);">${esc(a.accessoryName)}</div>
-                    <div style="font-size:0.72rem; color:var(--text-light);">${formatType(a.type)}</div>
+                  <div style="min-width:0; overflow:hidden;">
+                    <div style="font-weight:600; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${esc(a.accessoryName)}</div>
+                    <div style="font-size:0.72rem; color:var(--text-secondary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${formatType(a.type)}${a.purchaseDate ? ' · ' + formatDate(a.purchaseDate) : ''}</div>
                   </div>
-                  <div style="font-weight:700; color:var(--primary);">${formatCurrency(a.totalPrice)}</div>
+                  <div style="font-weight:700; color:var(--text-primary); margin-left:0.5rem; flex-shrink:0;">${formatCurrency(a.totalPrice)}</div>
                 `;
                 item.addEventListener('click', () => {
                     window.location.href = `/pages/accessory-detail.html?id=${a.id}`;
                 });
-                item.addEventListener('mouseenter', () => item.style.background = 'var(--bg-light)');
-                item.addEventListener('mouseleave', () => item.style.background = 'white');
+                item.addEventListener('mouseenter', () => item.style.background = 'var(--bg-hover)');
+                item.addEventListener('mouseleave', () => item.style.background = 'var(--bg-card)');
                 accList.appendChild(item);
             });
         } else {
-            accList.innerHTML = '<div style="font-size:0.8rem; color:var(--text-light); text-align:center; padding:1rem;">No recent accessories.</div>';
+            accList.innerHTML = '<div style="font-size:0.8rem; color:var(--text-muted); text-align:center; padding:1rem;">No recent accessories.</div>';
         }
 
     } catch (ex) {

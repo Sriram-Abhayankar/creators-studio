@@ -23,10 +23,10 @@ public interface AccessoryRepository extends JpaRepository<Accessory, Long> {
            "LEFT JOIN a.others o " +
            "WHERE (:name IS NULL OR LOWER(a.accessoryName) LIKE LOWER(CONCAT('%', :name, '%'))) " +
            "AND (:type IS NULL OR (:type = 'CONE' AND c IS NOT NULL) OR (:type = 'SIZE_PATTERN' AND sp IS NOT NULL) OR (:type = 'OTHERS' AND o IS NOT NULL)) " +
-           "AND (:startDate IS NULL OR (c IS NOT NULL AND c.purchaseDate >= :startDate)) " +
-           "AND (:endDate IS NULL OR (c IS NOT NULL AND c.purchaseDate <= :endDate)) " +
-           "ORDER BY a.id DESC")
-    List<Accessory> searchAccessoriesOrderByIdDesc(
+           "AND (:startDate IS NULL OR a.purchaseDate >= :startDate) " +
+           "AND (:endDate IS NULL OR a.purchaseDate <= :endDate) " +
+           "ORDER BY a.purchaseDate DESC")
+    List<Accessory> searchAccessoriesOrderByPurchaseDateDesc(
             @Param("name") String name,
             @Param("type") String type,
             @Param("startDate") LocalDateTime startDate,
@@ -39,36 +39,12 @@ public interface AccessoryRepository extends JpaRepository<Accessory, Long> {
            "LEFT JOIN a.others o " +
            "WHERE (:name IS NULL OR LOWER(a.accessoryName) LIKE LOWER(CONCAT('%', :name, '%'))) " +
            "AND (:type IS NULL OR (:type = 'CONE' AND c IS NOT NULL) OR (:type = 'SIZE_PATTERN' AND sp IS NOT NULL) OR (:type = 'OTHERS' AND o IS NOT NULL)) " +
-           "AND (:startDate IS NULL OR (c IS NOT NULL AND c.purchaseDate >= :startDate)) " +
-           "AND (:endDate IS NULL OR (c IS NOT NULL AND c.purchaseDate <= :endDate)) " +
-           "ORDER BY a.id ASC")
-    List<Accessory> searchAccessoriesOrderByIdAsc(
+           "AND (:startDate IS NULL OR a.purchaseDate >= :startDate) " +
+           "AND (:endDate IS NULL OR a.purchaseDate <= :endDate) " +
+           "ORDER BY a.purchaseDate ASC")
+    List<Accessory> searchAccessoriesOrderByPurchaseDateAsc(
             @Param("name") String name,
             @Param("type") String type,
-            @Param("startDate") LocalDateTime startDate,
-            @Param("endDate") LocalDateTime endDate
-    );
-
-    @Query("SELECT DISTINCT a FROM Accessory a " +
-           "JOIN a.cone c " +
-           "WHERE (:name IS NULL OR LOWER(a.accessoryName) LIKE LOWER(CONCAT('%', :name, '%'))) " +
-           "AND (:startDate IS NULL OR c.purchaseDate >= :startDate) " +
-           "AND (:endDate IS NULL OR c.purchaseDate <= :endDate) " +
-           "ORDER BY c.purchaseDate DESC")
-    List<Accessory> searchAccessoriesConeOrderByPurchaseDateDesc(
-            @Param("name") String name,
-            @Param("startDate") LocalDateTime startDate,
-            @Param("endDate") LocalDateTime endDate
-    );
-
-    @Query("SELECT DISTINCT a FROM Accessory a " +
-           "JOIN a.cone c " +
-           "WHERE (:name IS NULL OR LOWER(a.accessoryName) LIKE LOWER(CONCAT('%', :name, '%'))) " +
-           "AND (:startDate IS NULL OR c.purchaseDate >= :startDate) " +
-           "AND (:endDate IS NULL OR c.purchaseDate <= :endDate) " +
-           "ORDER BY c.purchaseDate ASC")
-    List<Accessory> searchAccessoriesConeOrderByPurchaseDateAsc(
-            @Param("name") String name,
             @Param("startDate") LocalDateTime startDate,
             @Param("endDate") LocalDateTime endDate
     );
@@ -82,8 +58,8 @@ public interface AccessoryRepository extends JpaRepository<Accessory, Long> {
     @Query("SELECT COALESCE(SUM(a.totalPrice), 0) FROM Accessory a WHERE a.others IS NOT NULL")
     BigDecimal sumOthersExpenses();
 
-    @Query("SELECT YEAR(c.purchaseDate), MONTH(c.purchaseDate), COALESCE(SUM(a.totalPrice), 0) " +
-           "FROM Accessory a JOIN a.cone c " +
-           "GROUP BY YEAR(c.purchaseDate), MONTH(c.purchaseDate)")
-    List<Object[]> getConeExpensesGroupedByMonth();
+    @Query("SELECT YEAR(a.purchaseDate), MONTH(a.purchaseDate), COALESCE(SUM(a.totalPrice), 0) " +
+           "FROM Accessory a " +
+           "GROUP BY YEAR(a.purchaseDate), MONTH(a.purchaseDate)")
+    List<Object[]> getAccessoryExpensesGroupedByMonth();
 }

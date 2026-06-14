@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -13,7 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class ConeDetailResponse {
-    private LocalDateTime purchaseDate;
-    private LocalDateTime createdAt;
     private List<ConeItemResponse> coneItems;
 }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -16,4 +17,5 @@ public class AccessoryListResponse {
     private String accessoryName;
     private BigDecimal totalPrice;
     private String type;
+    private LocalDateTime purchaseDate;
 }

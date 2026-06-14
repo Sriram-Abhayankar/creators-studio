@@ -5,6 +5,7 @@ import com.creatorsstudio.dto.request.UserRegisterRequest;
 import com.creatorsstudio.dto.response.UserResponse;
 
 public interface AuthService {
+    boolean accountExists();
     UserResponse registerUser(UserRegisterRequest request);
     UserResponse loginUser(UserLoginRequest request);
 }

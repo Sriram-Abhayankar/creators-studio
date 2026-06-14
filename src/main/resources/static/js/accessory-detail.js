@@ -35,10 +35,6 @@ document.addEventListener('DOMContentLoaded', async () => {
               </tr>`).join('');
             detailSection = `
               <p class="section-title">Cone Items</p>
-              <div class="detail-field">
-                <span class="field-label">Purchase Date</span>
-                <span class="field-value">${formatDate(a.cone.purchaseDate)}</span>
-              </div>
               <div style="overflow-x:auto;margin-top:0.5rem">
                 <table class="items-table">
                   <thead><tr><th>Colour Name</th><th>Code</th><th>Unit</th><th>Price/Unit</th><th>Row Total</th></tr></thead>
@@ -68,6 +64,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <h2>${esc(a.accessoryName)}</h2>
             <div class="detail-meta">
               <span class="type-badge ${typeCls}">${formatType(a.type)}</span>
+              <span style="color:var(--text-light); font-size:0.85rem; margin-left:0.5rem;">${a.purchaseDate ? formatDate(a.purchaseDate) : ''}</span>
             </div>
           </div>
           ${detailSection}

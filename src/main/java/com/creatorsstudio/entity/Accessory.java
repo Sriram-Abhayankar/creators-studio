@@ -3,8 +3,10 @@ package com.creatorsstudio.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Accessory")
@@ -24,6 +26,13 @@ public class Accessory {
 
     @Column(name = "Total_price", nullable = false)
     private BigDecimal totalPrice;
+
+    @Column(name = "Purchase_date")
+    private LocalDateTime purchaseDate;
+
+    @CreationTimestamp
+    @Column(name = "Created_at", updatable = false)
+    private LocalDateTime createdAt;
 
     @OneToOne(mappedBy = "accessory", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY, optional = true)
     @JsonManagedReference(value = "accessory-cone")

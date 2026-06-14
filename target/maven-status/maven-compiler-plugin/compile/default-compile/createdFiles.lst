@@ -97,4 +97,5 @@ com\creatorsstudio\service\ReportService.class
 com\creatorsstudio\controller\AccessoryPurchaseController.class
 com\creatorsstudio\dto\request\UserLoginRequest.class
 com\creatorsstudio\dto\response\AccessoryDetailResponse$AccessoryDetailResponseBuilder.class
+com\creatorsstudio\config\DataMigrationRunner.class
 com\creatorsstudio\dto\response\AccessoryListResponse.class

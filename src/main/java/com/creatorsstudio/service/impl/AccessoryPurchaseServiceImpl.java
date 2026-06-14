@@ -35,9 +35,9 @@ public class AccessoryPurchaseServiceImpl implements AccessoryPurchaseService {
     public void createConePurchase(ConePurchaseRequest request) {
         Accessory accessory = new Accessory();
         accessory.setAccessoryName(request.getAccessoryName());
+        accessory.setPurchaseDate(LocalDateTime.now());
 
         Cone cone = new Cone();
-        cone.setPurchaseDate(LocalDateTime.now());
         cone.setAccessory(accessory);
         accessory.setCone(cone);
 
@@ -56,6 +56,7 @@ public class AccessoryPurchaseServiceImpl implements AccessoryPurchaseService {
         Accessory accessory = new Accessory();
         accessory.setAccessoryName(request.getAccessoryName());
         accessory.setTotalPrice(request.getPrice());
+        accessory.setPurchaseDate(LocalDateTime.now());
 
         SizePattern sizePattern = new SizePattern();
         sizePattern.setBrandName(request.getBrandName());
@@ -75,6 +76,7 @@ public class AccessoryPurchaseServiceImpl implements AccessoryPurchaseService {
         accessory.setAccessoryName(request.getAccessoryName());
         // BUSINESS RULE: totalPrice = price (NOT unit × price)
         accessory.setTotalPrice(request.getPrice());
+        accessory.setPurchaseDate(LocalDateTime.now());
 
         Others others = new Others();
         others.setItemsName(request.getItemsName());
@@ -111,18 +113,10 @@ public class AccessoryPurchaseServiceImpl implements AccessoryPurchaseService {
 
         List<Accessory> accessories;
 
-        if ("CONE".equalsIgnoreCase(queryType)) {
-            if ("oldest".equalsIgnoreCase(sortBy)) {
-                accessories = accessoryRepository.searchAccessoriesConeOrderByPurchaseDateAsc(queryName, start, end);
-            } else {
-                accessories = accessoryRepository.searchAccessoriesConeOrderByPurchaseDateDesc(queryName, start, end);
-            }
+        if ("oldest".equalsIgnoreCase(sortBy)) {
+            accessories = accessoryRepository.searchAccessoriesOrderByPurchaseDateAsc(queryName, queryType, start, end);
         } else {
-            if ("oldest".equalsIgnoreCase(sortBy)) {
-                accessories = accessoryRepository.searchAccessoriesOrderByIdAsc(queryName, queryType, start, end);
-            } else {
-                accessories = accessoryRepository.searchAccessoriesOrderByIdDesc(queryName, queryType, start, end);
-            }
+            accessories = accessoryRepository.searchAccessoriesOrderByPurchaseDateDesc(queryName, queryType, start, end);
         }
 
         return accessories.stream().map(a -> {
@@ -132,6 +126,7 @@ public class AccessoryPurchaseServiceImpl implements AccessoryPurchaseService {
                     .accessoryName(a.getAccessoryName())
                     .totalPrice(a.getTotalPrice())
                     .type(resolvedType)
+                    .purchaseDate(a.getPurchaseDate())
                     .build();
         }).collect(Collectors.toList());
     }
@@ -293,8 +288,6 @@ public class AccessoryPurchaseServiceImpl implements AccessoryPurchaseService {
                         .collect(Collectors.toList());
             }
             coneDetail = ConeDetailResponse.builder()
-                    .purchaseDate(a.getCone().getPurchaseDate())
-                    .createdAt(a.getCone().getCreatedAt())
                     .coneItems(itemResponses)
                     .build();
         } else if (a.getSizePattern() != null) {
@@ -317,6 +310,8 @@ public class AccessoryPurchaseServiceImpl implements AccessoryPurchaseService {
                 .accessoryName(a.getAccessoryName())
                 .totalPrice(a.getTotalPrice())
                 .type(type)
+                .purchaseDate(a.getPurchaseDate())
+                .createdAt(a.getCreatedAt())
                 .cone(coneDetail)
                 .sizePattern(spDetail)
                 .others(othersDetail)

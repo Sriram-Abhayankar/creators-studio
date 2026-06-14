@@ -102,13 +102,11 @@ public class ReportServiceImpl implements ReportService {
             }
         }
 
-        // 2. Process Accessory (Cone-only) monthly expenses
-        // INTENTIONAL EXCLUSION RULE: Size Pattern and Others are excluded because they do not contain 
-        // purchase_date/created_at date columns in the database. Only Cone has a purchase date. 
-        // No date approximations or fabrications are made.
-        List<Object[]> coneMonths = accessoryRepository.getConeExpensesGroupedByMonth();
-        if (coneMonths != null) {
-            for (Object[] row : coneMonths) {
+        // 2. Process ALL Accessory monthly expenses
+        // All accessory types (Cone, Size Pattern, Others) now have purchaseDate on the Accessory entity
+        List<Object[]> accessoryMonths = accessoryRepository.getAccessoryExpensesGroupedByMonth();
+        if (accessoryMonths != null) {
+            for (Object[] row : accessoryMonths) {
                 if (row[0] == null || row[1] == null) continue;
                 int year = ((Number) row[0]).intValue();
                 int month = ((Number) row[1]).intValue();

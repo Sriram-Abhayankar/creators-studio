@@ -37,9 +37,9 @@ public class DashboardServiceImpl implements DashboardService {
         
         BigDecimal totalExpense = fabricExpense.add(accessoryExpense);
 
-        // Fetch top 5 recent fabrics sorted by purchaseDate DESC
+        // Fetch top 50 recent fabrics sorted by purchaseDate DESC
         List<FabricListResponse> recentFabrics = fabricRepository.findAll(
-                PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "purchaseDate"))
+                PageRequest.of(0, 50, Sort.by(Sort.Direction.DESC, "purchaseDate"))
         ).getContent().stream().map(fabric -> FabricListResponse.builder()
                 .id(fabric.getId())
                 .fabricName(fabric.getFabricName())
@@ -49,9 +49,9 @@ public class DashboardServiceImpl implements DashboardService {
                 .build()
         ).collect(Collectors.toList());
 
-        // Fetch top 5 recent accessories sorted by id DESC
+        // Fetch top 50 recent accessories sorted by purchaseDate DESC
         List<AccessoryListResponse> recentAccessories = accessoryRepository.findAll(
-                PageRequest.of(0, 5, Sort.by(Sort.Direction.DESC, "id"))
+                PageRequest.of(0, 50, Sort.by(Sort.Direction.DESC, "purchaseDate"))
         ).getContent().stream().map(a -> {
             String type = "UNKNOWN";
             if (a.getCone() != null) type = "CONE";
@@ -63,6 +63,7 @@ public class DashboardServiceImpl implements DashboardService {
                     .accessoryName(a.getAccessoryName())
                     .totalPrice(a.getTotalPrice())
                     .type(type)
+                    .purchaseDate(a.getPurchaseDate())
                     .build();
         }).collect(Collectors.toList());
 

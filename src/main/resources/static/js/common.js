@@ -127,3 +127,12 @@ function formatType(type) {
 function confirmAction(message) {
     return window.confirm(message);
 }
+
+// ─── Global Input Validation ──────────────────────────────────────────────────
+document.addEventListener('keydown', function(e) {
+    if (e.target && e.target.tagName === 'INPUT' && e.target.type === 'number') {
+        if (['e', 'E', '+', '-'].includes(e.key)) {
+            e.preventDefault();
+        }
+    }
+});
