@@ -1,0 +1,15 @@
+# Maven
+target/
+
+# IntelliJ
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.dbgit rm -r --cached target
